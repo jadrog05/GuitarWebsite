@@ -1,10 +1,18 @@
+"use client";
+
 import { auth0 } from "@/lib/auth0";
+import Navbar from "@/components/NavBar";
+import { redirect } from "next/navigation";
 
 export default async function DashboardPage() {
   const session = await auth0.getSession();
   const user = session?.user;
 
+  redirect("/onboarding");
+
     return (
+      <>
+      <Navbar />
       <div className="min-h-screen bg-gradient-to-br from-slate-800 to-slate-900 text-white flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">🎸 Welcome {user?.given_name}</h1>
@@ -13,5 +21,6 @@ export default async function DashboardPage() {
           </a>
         </div>
       </div>
+      </>
     );
   }

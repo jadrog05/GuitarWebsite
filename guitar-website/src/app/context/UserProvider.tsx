@@ -1,39 +1,46 @@
-// app/context/UserProvider.tsx
-"use client";
+'use client';
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 
-interface User {
+type User = {
   name?: string;
   email?: string;
-}
+  picture?: string;
+  sub: string;
+};
 
-interface UserContextValue {
+type UserContextValue = {
   user: User | null;
   isLoading: boolean;
-}
+  error: Error | null;
+};
 
 const UserContext = createContext<UserContextValue>({
   user: null,
   isLoading: true,
+  error: null,
 });
 
-export const UserProvider = ({ children }: { children: React.ReactNode }) => {
+export const useUser = () => useContext(UserContext);
+
+export function UserProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch("/api/session");
-        if (res.ok) {
-          const data = await res.json();
-          setUser(data.user);
-        }
+        const res = await fetch('/api/auth/me');
+        if (!res.ok) throw new Error('Failed to fetch user');
+
+        const data = await res.json();
+        setUser(data.user || null);
       } catch (err) {
-        console.error("Failed to fetch user session", err);
+        setError(err as Error);
+        setUser(null);
       } finally {
-        setIsLoading(false);
+        setLoading(false);
       }
     };
 
@@ -41,10 +48,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, isLoading }}>
+    <UserContext.Provider value={{ user, isLoading, error }}>
       {children}
     </UserContext.Provider>
   );
-};
-
-export const useUser = () => useContext(UserContext);
+}
