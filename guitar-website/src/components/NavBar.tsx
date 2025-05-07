@@ -18,7 +18,7 @@ export default function Navbar() {
 
   return (
     <header className="shadow-md px-4 py-3 fixed 
-                w-full top-0 left-0 bg-sidebar">
+                w-full h-16 top-0 left-0 bg-sidebar">
       <div className="max-w-6xl mx-auto flex justify-between items-center bg-sidebar">
         <Link href="/" className="text-xl font-bold text-sidebar-foreground">
           🎸 GuitarPractice
