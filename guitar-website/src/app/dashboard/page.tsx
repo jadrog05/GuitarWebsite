@@ -1,15 +1,9 @@
-import { auth0 } from "@/lib/auth0";
 import '@app/globals.css';
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import Navbar from "@/components/NavBar";
-import { Separator } from "@/components/ui/separator";
 
 export default async function DashboardPage() {
-  const session = await auth0.getSession();
-  const user = session?.user;
-
   return (
     <>
       <Navbar />

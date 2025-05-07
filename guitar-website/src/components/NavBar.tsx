@@ -6,15 +6,10 @@ import { Menu, Moon, Sun } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from './ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
-import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
+import { Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet';
 import { Avatar, AvatarFallback } from '@radix-ui/react-avatar';
 import { AvatarImage } from './ui/avatar';
-import { Toggle } from './ui/toggle';
 import { useTheme } from 'next-themes';
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@radix-ui/react-dropdown-menu';
-import { Separator } from './ui/separator';
 
 export default function Navbar() {
   const { user, isLoading } = useUser();
