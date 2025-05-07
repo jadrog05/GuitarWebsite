@@ -1,26 +1,46 @@
-"use client";
-
 import { auth0 } from "@/lib/auth0";
+import '@app/globals.css';
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import Navbar from "@/components/NavBar";
-import { redirect } from "next/navigation";
+import { Separator } from "@/components/ui/separator";
 
 export default async function DashboardPage() {
   const session = await auth0.getSession();
   const user = session?.user;
 
-  redirect("/onboarding");
-
-    return (
-      <>
+  return (
+    <>
       <Navbar />
-      <div className="min-h-screen bg-gradient-to-br from-slate-800 to-slate-900 text-white flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4">🎸 Welcome {user?.given_name}</h1>
-          <a href="/auth/logout" className="mt-4 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Log out with Auth0
-          </a>
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>Practice Time</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground">You’ve practiced for 3.5 hours this week.</p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Latest Session</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground">Scales, arpeggios, and fretboard mapping.</p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Goals</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Button variant="outline">Update Goals</Button>
+          </CardContent>
+        </Card>
       </div>
-      </>
-    );
-  }
+    </>
+  );
+}

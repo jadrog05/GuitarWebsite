@@ -52,8 +52,8 @@ export default function OnboardingPage() {
   return (
     <>
     <Navbar />
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-indigo-200 px-4">
-      <div className="w-full max-w-xl bg-white rounded-xl shadow-md p-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-800 to-slate-900 text-white flex items-center justify-center">
+      <div className="w-flex bg-white rounded-xl shadow-md p-8">
         <AnimatePresence mode="wait">
           <motion.div
             key={step}
