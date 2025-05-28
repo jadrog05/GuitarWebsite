@@ -8,7 +8,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-gray-50 text-gray-900 min-h-screen font-sans;
+  @apply bg-background text-foreground min-h-screen font-sans;
 }
 
 @theme inline {
@@ -242,3 +242,10 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom tab trigger styling */
+/* global.css */
+.tab-trigger {
+  @apply px-6 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-muted/70;
+}
+

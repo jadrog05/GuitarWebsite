@@ -1,13 +1,18 @@
 import { auth0 } from '@/lib/auth0'
-import { fetchFromApi } from '@/lib/api'
 import Navbar from '@/components/NavBar'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { notFound, redirect } from 'next/navigation'
 
-export default async function PracticeSessionPage({ params }: { params: { id: string } }) {
+type tParams = Promise<{ id: string[] }>;
+
+export default async function PracticeSessionPage(props: { params: tParams }) {
+    const { id } = await props.params
+
+    if (!id) notFound()
+
     const session = await auth0.getSession()
-    if (!session?.user) return <div>Not authenticated</div>
 
-    //const sessionData = await fetchFromApi(`/practice/session/${params.id}`, session.tokenSet.accessToken)
+    if (!session?.user) redirect('/login')
 
     return (
         <>
@@ -15,12 +20,10 @@ export default async function PracticeSessionPage({ params }: { params: { id: st
             <div className='min-h-screen pt-25 bg-background text-foreground p-4 justify-center'>
                 <Card>
                     <CardHeader>
-                        <CardTitle>
-                            Practice Session {params.id}
-                        </CardTitle>
+                        <CardTitle>Practice Session {id}</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <a>THIS WILL BE A THEORY SESSION</a>
+                        <p>THIS WILL BE A THEORY SESSION</p>
                     </CardContent>
                 </Card>
             </div>

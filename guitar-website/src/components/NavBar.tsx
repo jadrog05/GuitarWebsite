@@ -17,7 +17,7 @@ export default function Navbar() {
   const { setTheme } = useTheme();
 
   return (
-    <header className="shadow-md px-4 py-3 fixed 
+    <header className="shadow-md px-2 py-3 fixed 
                 w-full h-16 top-0 left-0 bg-sidebar text-sidebar-foreground">
       <div className="max-w-6xl mx-auto flex justify-between items-center bg-sidebar">
         <Link href="/" className="text-xl font-bold text-sidebar-foreground">
