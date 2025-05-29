@@ -1,5 +1,5 @@
 // src/lib/api/index.ts
-var baseUrl = process.env.NEXT_PUBLIC_GUITAR_API_HOSTED;
+const baseUrl = process.env.NEXT_PUBLIC_GUITAR_API_HOSTED;
 
 // if (process.env.NODE_ENV !== 'production') {
 //   baseUrl = process.env.NEXT_PUBLIC_GUITAR_API_URL

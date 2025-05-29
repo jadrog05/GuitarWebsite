@@ -2,9 +2,7 @@ import { auth0 } from '@/lib/auth0'
 import { fetchFromApi } from '@/lib/api'
 import { NextResponse } from 'next/server'
 
-export async function GET(req: Request) {
-    const { searchParams } = new URL(req.url);
-    
+export async function GET(req: Request) {   
   try {
     const session = await auth0.getSession()
     const token = session?.tokenSet.accessToken

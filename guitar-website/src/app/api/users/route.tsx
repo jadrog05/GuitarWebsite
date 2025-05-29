@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server'
 
 export async function GET(req: Request) {    
   try {
+    console.log(req.url + 'called.')
     const session = await auth0.getSession()
     const token = session?.tokenSet.accessToken
     if (!token) {
