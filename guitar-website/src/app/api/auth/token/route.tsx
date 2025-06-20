@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   const { token } = await auth0.getAccessToken();
-  return NextResponse.json({ token }); 
+  console.log("Token retrieved:", token);
+  return NextResponse.json({ accessToken:token }); 
 }
 

@@ -2,6 +2,8 @@
 
 import { motion, useReducedMotion } from 'framer-motion';
 import { useRouter } from 'next/navigation'
+import { useUser } from './context/UserProvider';
+import { useEffect } from "react";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -15,6 +17,21 @@ const fadeInUp = {
 export default function LandingPage() {
   const reduceMotion = useReducedMotion();
   const router = useRouter();
+  const { user, isLoading } = useUser();
+
+  useEffect(() => {
+    if (!isLoading && user) {
+      router.replace("/dashboard");
+    }
+  }, [user, isLoading, router]);
+
+  if (isLoading) {
+    return null; // or a spinner
+  }
+
+  if (user) {
+    return null; // avoids flash before router.replace
+  }
 
   return (
     <main className="relative min-h-screen flex flex-col items-center justify-center bg-background text-foreground overflow-hidden px-6">
@@ -59,7 +76,7 @@ export default function LandingPage() {
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.9 }}
             className="px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-lg shadow-md"
-            onClick={() =>  router.push("/dashboard")}
+            onClick={() => router.push("/auth/login")}
           >
             Get Started
           </motion.button>

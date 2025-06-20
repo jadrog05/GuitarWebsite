@@ -1,9 +1,9 @@
 // src/lib/api/index.ts
-const baseUrl = process.env.NEXT_PUBLIC_GUITAR_API_HOSTED;
+let baseUrl = process.env.NEXT_PUBLIC_GUITAR_API_HOSTED;
 
-// if (process.env.NODE_ENV !== 'production') {
-//   baseUrl = process.env.NEXT_PUBLIC_GUITAR_API_URL
-// }
+if (process.env.NODE_ENV !== 'production') {
+  baseUrl = process.env.NEXT_PUBLIC_GUITAR_API_URL
+}
 
 if (!baseUrl) {
   throw new Error('Missing base URL for API')   

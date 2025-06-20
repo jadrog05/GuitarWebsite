@@ -1,15 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchSessions } from '@/lib/api/sessions';
+import { fetchSession } from '@/lib/api/sessions';
 import { Session } from '@/lib/types';
 
-export function useSessions(sessionType?: Session['sessionType']) {
+export function useSession(sessionId: string) {
 
-  return useQuery<Session[], Error>({
-    queryKey: ['sessions', sessionType],
+  return useQuery<Session, Error>({
+    queryKey: ['session', sessionId],
     queryFn: async () => {
+      console.log('Fetching token');
       const res = await fetch('/api/auth/token');
       const { accessToken } = await res.json();
-      return fetchSessions(accessToken, sessionType);
+      return fetchSession(accessToken, sessionId);
     },
   });
 }
